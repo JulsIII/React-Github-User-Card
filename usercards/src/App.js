@@ -6,6 +6,7 @@ const CardStyled = styled.div`
     border: 1px solid ${(pr) => pr.theme.primaryColor};
     box-shadow: 0px 1px 6px -2px #807f7f;
     border-radius: 8px;
+    font-size:1.25rem;
     margin: 10px;
     padding: 1px;
     color: ${(pr) => pr.theme.secondaryColor};
@@ -17,24 +18,17 @@ const CardStyled = styled.div`
     flex-wrap: nowrap;
 
 h3{
-    margin-top:15px;
-    margin-bottom:5px;
+    margin-top:10px;
+    margin-bottom:0px;
     display: flex;
-    justify-content: left;
+    justify-content: center;
     font-family: 'Quantico', sans-serif;
 }
 
 h4{
     margin:8px;
     display: flex;
-    justify-content: left;
-    font-family: 'Quantico', sans-serif;
-}
-
-h5{
-    margin:8px;
-    display: flex;
-    justify-content: left;
+    justify-content: center;
     font-family: 'Quantico', sans-serif;
 }
 
@@ -46,13 +40,30 @@ img {
 
 `
 
-
-const UserBlockStyled = styled.div`
+const UserBlockStyledA = styled.div`
     border: 1px solid ${(pr) => pr.theme.primaryColor};
     box-shadow: 0px 1px 6px -2px #807f7f;
     border-radius: 8px;
-    margin-top: 14px;
-    padding: 14px;
+    margin-top: 10px;
+    padding: 10px;
+    font-size:1.45rem;
+    color: ${(pr) => pr.theme.primaryColor};
+    background-color: ${(pr) => pr.theme.bgColorA};
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    flex-wrap: wrap;
+   
+`
+
+const UserBlockStyledB = styled.div`
+    border: 1px solid ${(pr) => pr.theme.primaryColor};
+    box-shadow: 0px 1px 6px -2px #807f7f;
+    border-radius: 8px;
+    margin-top: 10px;
+    padding: 10px;
+    font-size:1.35rem;
     color: ${(pr) => pr.theme.primaryColor};
     background-color: ${(pr) => pr.theme.bgColorA};
     display: flex;
@@ -61,6 +72,7 @@ const UserBlockStyled = styled.div`
     flex-wrap: wrap;
    
 `
+
 
 class App extends React.Component {
     state = {
@@ -90,8 +102,6 @@ class App extends React.Component {
             .catch(err=>{
                 console.log(err);
             });
-
-
     }
 
 
@@ -103,35 +113,34 @@ class App extends React.Component {
         return(
         
         <div>
-            <div>
-                
-            </div>
-             <UserBlockStyled>
+             <UserBlockStyledA>
+                <h3>My Git</h3>
                 
                 {
                     <CardStyled>
-                        <img width="200" src={this.state.userData.avatar_url}/>
+                        <img src={this.state.userData.avatar_url}/>
                             <div>
-                                <h3>{this.state.userData.login}</h3>
+                                <h4>{this.state.userData.login}</h4>
+                                <h4>{this.state.userData.id}</h4>
                             </div>
                     </CardStyled>
                 }
-            </UserBlockStyled>
-            <UserBlockStyled>
+            </UserBlockStyledA>
+            <UserBlockStyledB>
+            <h4>Followers:</h4>
                 {
                     this.state.followerData.map(user =>(
                         <CardStyled>
-                            <img width="200" src={user.avatar_url}/>
+                            <img src={user.avatar_url}/>
                                 <div>
-                                    <h3>{user.login}</h3>
+                                    <h4>{user.login}</h4>
+                                    <h4>{user.id}</h4>
                                 </div>
                        
                         </CardStyled>
                     ))
                 }
-            </UserBlockStyled>
-
-            
+            </UserBlockStyledB>
         </div>);
     }
 }
