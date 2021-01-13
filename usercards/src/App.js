@@ -1,7 +1,66 @@
 import React from 'react';
 import axios from 'axios';
-import User from "./components/User"
 import styled from "styled-components";
+
+const CardStyled = styled.div`
+    border: 1px solid ${(pr) => pr.theme.primaryColor};
+    box-shadow: 0px 1px 6px -2px #807f7f;
+    border-radius: 8px;
+    margin: 10px;
+    padding: 1px;
+    color: ${(pr) => pr.theme.secondaryColor};
+    background-color: ${(pr) => pr.theme.bgColorB};
+    width: 20% ;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    flex-wrap: nowrap;
+
+h3{
+    margin-top:15px;
+    margin-bottom:5px;
+    display: flex;
+    justify-content: left;
+    font-family: 'Quantico', sans-serif;
+}
+
+h4{
+    margin:8px;
+    display: flex;
+    justify-content: left;
+    font-family: 'Quantico', sans-serif;
+}
+
+h5{
+    margin:8px;
+    display: flex;
+    justify-content: left;
+    font-family: 'Quantico', sans-serif;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+`
+
+
+const UserBlockStyled = styled.div`
+    border: 1px solid ${(pr) => pr.theme.primaryColor};
+    box-shadow: 0px 1px 6px -2px #807f7f;
+    border-radius: 8px;
+    margin-top: 14px;
+    padding: 14px;
+    color: ${(pr) => pr.theme.primaryColor};
+    background-color: ${(pr) => pr.theme.bgColorA};
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+   
+`
 
 class App extends React.Component {
     state = {
@@ -34,71 +93,47 @@ class App extends React.Component {
 
 
     }
-    
-    componentDidMountII() {
-      
-    }
 
 
     // componentDidUpdate(prevProps, prevState) {
-        
-   
     //         }
 
 
     render() {
-        return(<div>
-             <div className="userContainer">
+        return(
+        
+        <div>
+            <div>
+                
+            </div>
+             <UserBlockStyled>
+                
                 {
-                  
-                    <img width="200" src={this.state.userData.avatar_url}/>
-
-                    
-                    // (image=>(
-                    //     <img width="200" key={image} src={image}/>
-                    // ))
+                    <CardStyled>
+                        <img width="200" src={this.state.userData.avatar_url}/>
+                            <div>
+                                <h3>{this.state.userData.login}</h3>
+                            </div>
+                    </CardStyled>
                 }
-                 <div className="followerContainer">asdf
+            </UserBlockStyled>
+            <UserBlockStyled>
                 {
                     this.state.followerData.map(user =>(
-                        <img width="200" src={user.avatar_url}/>
+                        <CardStyled>
+                            <img width="200" src={user.avatar_url}/>
+                                <div>
+                                    <h3>{user.login}</h3>
+                                </div>
+                       
+                        </CardStyled>
                     ))
                 }
-            </div>
-            </div>
+            </UserBlockStyled>
+
+            
         </div>);
     }
 }
 
 export default App;
-
-
-
-
-
-
-// import logo from './logo.svg';
-// import './App.css';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;
