@@ -5,62 +5,67 @@ import styled from "styled-components";
 
 class App extends React.Component {
     state = {
-        avatarImgs: [],
-        userName: ""
+        userData: {},
+        followerData: []
     }
 
     componentDidMount() {
         axios.get("https://api.github.com/users/JulsIII")
             .then((res)=>{
-                console.log(res);
+                console.log('asdf', res);
                 this.setState({
-                  avatarImgs: res.data
+                    userData: res.data
                 })
             })
             .catch(err=>{
                 console.log(err);
             });
+
+            axios.get("https://api.github.com/users/JulsIII/followers")
+            .then((res)=>{
+                console.log('follower', res);
+                this.setState({
+                    followerData: res.data
+                })
+            })
+            .catch(err=>{
+                console.log(err);
+            });
+
+
     }
     
-    componentDidUpdate(prevProps, prevState) {
+    componentDidMountII() {
+      
+    }
+
+
+    // componentDidUpdate(prevProps, prevState) {
         
-              // this.setState({
-              //   avatarImgs: res.data.message
-              // })
-              console.log("App: Component Did Update");
-              console.log("old props ", prevProps);
-              console.log("new props ", this.props);
+   
+    //         }
 
-              console.log("old state ", prevState);
-              console.log("new state:", this.state);
-            }
-
-    // handleChange = e => {
-    //     this.setState({
-    //         dogBreed: e.target.value
-    //     });
-    // }
-
-    // handleClick = e => {
-    //     e.preventDefault();
-    //     axios.get(`https://dog.ceo/api/breed/${this.state.dogBreed}/images`)
-    //         .then(res=>{
-    //             this.setState({
-    //               avatarImgs: res.data.message
-    //             });
-    //         })
-    // }
 
     render() {
         return(<div>
              <div className="userContainer">
                 {
-                    this.state.avatarImgs.map(image=>(
-                        <img width="200" key={image} src={image}/>
+                  
+                    <img width="200" src={this.state.userData.avatar_url}/>
+
+                    
+                    // (image=>(
+                    //     <img width="200" key={image} src={image}/>
+                    // ))
+                }
+                 <div className="followerContainer">asdf
+                {
+                    this.state.followerData.map(user =>(
+                        <img width="200" src={user.avatar_url}/>
                     ))
                 }
             </div>
-            <div>{this.state.userName}</div>
+            </div>
         </div>);
     }
 }
